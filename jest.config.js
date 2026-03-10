@@ -3,6 +3,7 @@ const { createCjsPreset } = require('jest-preset-angular/presets');
 module.exports = {
   ...createCjsPreset(),
   roots: ['<rootDir>/src'],
+  testTimeout: 30000,
   setupFilesAfterEnv: ['<rootDir>/setup-jest.ts'],
   collectCoverageFrom: [
     'src/app/**/*.ts',

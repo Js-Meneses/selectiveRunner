@@ -11,9 +11,11 @@ if (!supportedEnvironments.has(requestedEnvironment)) {
 }
 
 const workspaceRoot = process.cwd();
+// En CI usar 0 ms para evitar timeout de Jest (5s por defecto). Local/demo usa 10s.
+const defaultDelay = process.env.CI === 'true' ? '0' : '10000';
 const env = {
   ...process.env,
-  SLOW_TEST_DELAY_MS: process.env.SLOW_TEST_DELAY_MS ?? '10000',
+  SLOW_TEST_DELAY_MS: process.env.SLOW_TEST_DELAY_MS ?? defaultDelay,
   JEST_MAX_WORKERS: process.env.JEST_MAX_WORKERS ?? '50%',
 };
 
