@@ -39,6 +39,19 @@ export function buildSyntheticLabel(featureIndex: number, seed: number): string 
   return `feature-${featureIndex.toString().padStart(3, '0')}-seed-${seed}`;
 }
 
+/**
+ * Wrapper de it.each con tipos correctos.
+ * Evita el conflicto entre @types/jest y @types/jasmine en el IDE.
+ */
+export function itEach(
+  cases: SyntheticCase[],
+  nameTemplate: string,
+  fn: (arg: SyntheticCase) => void,
+): void {
+  (it as unknown as { each: (table: SyntheticCase[]) => (name: string, f: (arg: SyntheticCase) => void) => void })
+    .each(cases)(nameTemplate, fn);
+}
+
 export function buildSyntheticCases(featureIndex: number): SyntheticCase[] {
   return Array.from({ length: getCasesPerSpec() }, (_, index) => {
     const seed = featureIndex + index + 1;

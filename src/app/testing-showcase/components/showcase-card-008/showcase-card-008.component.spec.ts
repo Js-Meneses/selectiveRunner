@@ -2,6 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import {
   buildSyntheticCases,
+  itEach,
   waitForSyntheticDelay,
 } from '../../../../testing/slow-test-helpers';
 import { ShowcaseCard008Component } from './showcase-card-008.component';
@@ -23,9 +24,7 @@ describe('ShowcaseCard008Component', () => {
     component = fixture.componentInstance;
   });
 
-  it.each(buildSyntheticCases(53))(
-    'renderiza el caso %#',
-    ({ expectedLabel, expectedScore, seed }) => {
+  itEach(buildSyntheticCases(53), 'renderiza el caso %#', ({ expectedLabel, expectedScore, seed }) => {
       component.seed = seed;
       fixture.detectChanges();
 
@@ -33,6 +32,5 @@ describe('ShowcaseCard008Component', () => {
       expect(component.score).toBe(expectedScore);
       expect(fixture.nativeElement.textContent).toContain(expectedLabel);
       expect(fixture.nativeElement.textContent).toContain(String(expectedScore));
-    },
-  );
+    });
 });
