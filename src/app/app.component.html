@@ -1,0 +1,64 @@
+<main class="hero-shell">
+  <section class="hero-card">
+    <p class="eyebrow">Demo de pipeline selectivo con Jest</p>
+    <h1>{{ title }}</h1>
+    <p class="lead">
+      Proyecto de muestra para comparar una suite pesada contra la ejecucion de
+      solo los tests relacionados con archivos modificados.
+    </p>
+
+    <div class="stats-grid">
+      <article class="stat">
+        <span class="label">Specs generados</span>
+        <strong>{{ showcase.specFiles }}</strong>
+      </article>
+      <article class="stat">
+        <span class="label">Tests sinteticos</span>
+        <strong>{{ showcase.totalTests }}</strong>
+      </article>
+      <article class="stat">
+        <span class="label">Servicios</span>
+        <strong>{{ showcase.serviceCount }}</strong>
+      </article>
+      <article class="stat">
+        <span class="label">Componentes</span>
+        <strong>{{ showcase.componentCount }}</strong>
+      </article>
+    </div>
+  </section>
+
+  <section class="panel-grid">
+    <article class="panel">
+      <h2>Comandos rapidos</h2>
+      <ul>
+        @for (command of quickCommands; track command) {
+          <li>
+            <code>{{ command }}</code>
+          </li>
+        }
+      </ul>
+    </article>
+
+    <article class="panel">
+      <h2>Estrategia por ambiente</h2>
+      <ul>
+        @for (scenario of ciScenarios; track scenario.environment) {
+          <li>
+            <strong>{{ scenario.environment | uppercase }}</strong>
+            <p>{{ scenario.behavior }}</p>
+            <code>{{ scenario.command }}</code>
+          </li>
+        }
+      </ul>
+    </article>
+
+    <article class="panel panel-accent">
+      <h2>Como esta armado</h2>
+      <ul>
+        <li>Cada spec agrega una espera sintetica configurable con <code>SLOW_TEST_DELAY_MS</code>.</li>
+        <li>En dev y stg se usa <code>git diff</code> + <code>jest --findRelatedTests</code>.</li>
+        <li>En prod se corre toda la suite y se habilita cobertura.</li>
+      </ul>
+    </article>
+  </section>
+</main>

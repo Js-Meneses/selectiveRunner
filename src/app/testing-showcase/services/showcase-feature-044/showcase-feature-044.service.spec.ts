@@ -1,0 +1,28 @@
+import { TestBed } from '@angular/core/testing';
+
+import {
+  buildSyntheticCases,
+  waitForSyntheticDelay,
+} from '../../../../testing/slow-test-helpers';
+import { ShowcaseFeature044Service } from './showcase-feature-044.service';
+
+describe('ShowcaseFeature044Service', () => {
+  let service: ShowcaseFeature044Service;
+
+  beforeAll(async () => {
+    await waitForSyntheticDelay();
+  });
+
+  beforeEach(() => {
+    TestBed.configureTestingModule({});
+    service = TestBed.inject(ShowcaseFeature044Service);
+  });
+
+  it.each(buildSyntheticCases(44))(
+    'resuelve el caso %#',
+    ({ expectedLabel, expectedScore, seed }) => {
+      expect(service.score(seed)).toBe(expectedScore);
+      expect(service.label(seed)).toBe(expectedLabel);
+    },
+  );
+});

@@ -1,0 +1,145 @@
+:host {
+  --ink: #14213d;
+  --muted: #4f5d75;
+  --paper: #fbf8f3;
+  --sand: #f0e5d8;
+  --accent: #d66853;
+  --line: rgba(20, 33, 61, 0.12);
+  display: block;
+  min-height: 100vh;
+  background:
+    radial-gradient(circle at top left, rgba(214, 104, 83, 0.24), transparent 28%),
+    radial-gradient(circle at top right, rgba(20, 33, 61, 0.18), transparent 26%),
+    linear-gradient(180deg, #fffdf8 0%, var(--paper) 100%);
+  color: var(--ink);
+  font-family: "Segoe UI Variable Text", "Trebuchet MS", sans-serif;
+}
+
+.hero-shell {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 48px 20px 64px;
+}
+
+.hero-card,
+.panel {
+  border: 1px solid var(--line);
+  border-radius: 28px;
+  background: rgba(255, 255, 255, 0.82);
+  box-shadow: 0 18px 60px rgba(20, 33, 61, 0.08);
+  backdrop-filter: blur(12px);
+}
+
+.hero-card {
+  padding: 32px;
+}
+
+.eyebrow {
+  margin: 0 0 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  font-size: 0.78rem;
+  color: var(--accent);
+}
+
+h1 {
+  margin: 0;
+  font-family: "Georgia", "Times New Roman", serif;
+  font-size: clamp(2.2rem, 5vw, 4.4rem);
+  line-height: 0.96;
+}
+
+.lead {
+  max-width: 760px;
+  margin: 18px 0 0;
+  font-size: 1.05rem;
+  line-height: 1.7;
+  color: var(--muted);
+}
+
+.stats-grid,
+.panel-grid {
+  display: grid;
+  gap: 18px;
+}
+
+.stats-grid {
+  margin-top: 28px;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+}
+
+.stat {
+  padding: 18px;
+  border-radius: 20px;
+  background: linear-gradient(180deg, rgba(240, 229, 216, 0.72), rgba(255, 255, 255, 0.96));
+}
+
+.stat .label {
+  display: block;
+  margin-bottom: 10px;
+  color: var(--muted);
+  font-size: 0.92rem;
+}
+
+.stat strong {
+  font-size: 2rem;
+}
+
+.panel-grid {
+  margin-top: 24px;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+}
+
+.panel {
+  padding: 24px;
+}
+
+.panel-accent {
+  background: linear-gradient(180deg, rgba(214, 104, 83, 0.08), rgba(255, 255, 255, 0.94));
+}
+
+h2 {
+  margin: 0 0 18px;
+  font-size: 1.15rem;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+li + li {
+  margin-top: 16px;
+}
+
+p {
+  margin: 8px 0;
+  color: var(--muted);
+}
+
+code {
+  display: inline-block;
+  padding: 10px 12px;
+  border-radius: 14px;
+  background: #1f2937;
+  color: #fdf3e7;
+  font-size: 0.88rem;
+  word-break: break-word;
+}
+
+@media (max-width: 640px) {
+  .hero-shell {
+    padding-inline: 14px;
+    padding-top: 28px;
+  }
+
+  .hero-card,
+  .panel {
+    border-radius: 22px;
+  }
+
+  .hero-card {
+    padding: 24px;
+  }
+}
