@@ -4,6 +4,7 @@ import { buildSyntheticLabel, calculateSyntheticScore } from '../../../../testin
 
 @Injectable({ providedIn: 'root' })
 export class ShowcaseFeature001Service {
+  // Prueba
   readonly featureIndex = 1;
 
   score(seed: number): number {
