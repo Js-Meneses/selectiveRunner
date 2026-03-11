@@ -9,6 +9,8 @@ on:
   push:
     branches:
       - main
+      - develop
+      - staging
 
 jobs:
   unit-tests:
@@ -31,13 +33,26 @@ jobs:
 
       - name: Run selective strategy
         shell: bash
+        env:
+          BASE_SHA: ${{ github.event_name == 'push' && github.event.before || github.event.pull_request.base.sha }}
+          HEAD_SHA: ${{ github.event_name == 'push' && github.event.after || github.event.pull_request.head.sha }}
         run: |
           if [[ "${GITHUB_EVENT_NAME}" == "push" && "${GITHUB_REF_NAME}" == "main" ]]; then
             npm run test:ci:prod
+          elif [[ "${GITHUB_EVENT_NAME}" == "push" && ("${GITHUB_REF_NAME}" == "develop" || "${GITHUB_REF_NAME}" == "staging") ]]; then
+            if [[ "${BASE_SHA}" == "0000000000000000000000000000000000000000" ]]; then
+              npm run test:ci:prod
+            else
+              if [[ "${GITHUB_REF_NAME}" == "staging" ]]; then
+                npm run test:ci:stg -- --base=${BASE_SHA} --head=${HEAD_SHA}
+              else
+                npm run test:ci:dev -- --base=${BASE_SHA} --head=${HEAD_SHA}
+              fi
+            fi
           elif [[ "${GITHUB_BASE_REF}" == "main" ]]; then
             npm run test:ci:prod
           elif [[ "${GITHUB_BASE_REF}" == "staging" ]]; then
-            npm run test:ci:stg -- --base=${{ github.event.pull_request.base.sha }} --head=${{ github.event.pull_request.head.sha }}
+            npm run test:ci:stg -- --base=${BASE_SHA} --head=${HEAD_SHA}
           else
-            npm run test:ci:dev -- --base=${{ github.event.pull_request.base.sha }} --head=${{ github.event.pull_request.head.sha }}
+            npm run test:ci:dev -- --base=${BASE_SHA} --head=${HEAD_SHA}
           fi
